@@ -6,10 +6,11 @@ var ToDo = Marionette.LayoutView.extend({
   template: require('./templates/todoitem.html')
 });
 
-var TodoList = Marionette.CollectionView.extend({
+var TodoList = Marionette.CompositeView.extend({
   el: '#app-hook',
-  tagName: 'ul',
-  childView: ToDo
+  template: require('./templates/todolist.html'),
+  childView: ToDo,
+  childViewContainer: 'ul'
 });
 
 var todo = new TodoList({
