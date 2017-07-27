@@ -1,42 +1,34 @@
-var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
 
-var ToDoModel = require('../models/todo');
+var FormView = require('./form');
+var ListView = require('./list');
 
-var ToDo = Marionette.LayoutView.extend({
-  tagName: 'li',
-  template: require('../templates/todoitem.html')
-});
-
-var TodoList = Marionette.CompositeView.extend({
+var Layout = Marionette.LayoutView.extend({
   el: '#app-hook',
-  template: require('../templates/todolist.html'),
 
-  childView: ToDo,
-  childViewContainer: 'ul',
+  template: require('../templates/layout.html'),
 
-  ui: {
-    assignee: '#id_assignee',
-    form: 'form',
-    text: '#id_text'
-  },
-
-  triggers: {
-    'submit @ui.form': 'add:todo:item'
+  regions: {
+    form: '.form',
+    list: '.list'
   },
 
   collectionEvents: {
     add: 'itemAdded'
   },
 
-  modelEvents: {
-    change: 'render'
+  onShow: function() {
+    var formView = new FormView({model: this.model});
+    var listView = new ListView({collection: this.collection});
+
+    this.showChildView('form', formView);
+    this.showChildView('list', listView);
   },
 
-  onAddTodoItem: function() {
+  onChildviewAddTodoItem: function(child) {
     this.model.set({
-      assignee: this.ui.assignee.val(),
-      text: this.ui.text.val()
+      assignee: child.ui.assignee.val(),
+      text: child.ui.text.val()
     }, {validate: true});
 
     var items = this.model.pick('assignee', 'text');
@@ -51,4 +43,4 @@ var TodoList = Marionette.CompositeView.extend({
   }
 });
 
-module.exports = TodoList;
+module.exports = Layout;
