@@ -1,13 +1,26 @@
-var Marionette = require('backbone.marionette');
+'use strict';
 
-var ToDo = Marionette.LayoutView.extend({
-  tagName: 'li',
-  template: require('../templates/todoitem.html')
-});
+import Marionette from 'backbone.marionette';
+import TodoItemTemplate from '../templates/todoitem.html';
 
-var ToDoList = Marionette.CollectionView.extend({
-  tagName: 'ul',
-  childView: ToDo
-});
+class Todo extends Marionette.LayoutView
+{
+  constructor(options)
+  {
+    options.template = TodoItemTemplate;
+    options.tagName = 'li';
 
-module.exports = ToDoList;
+    super(options);
+  }
+}
+
+export default class ListView extends Marionette.CollectionView
+{
+  constructor(options)
+  {
+    options.tagName = 'ul';
+    options.childView = Todo;
+
+    super(options);
+  }
+}

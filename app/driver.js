@@ -1,3 +1,5 @@
+'use strict';
+
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
@@ -14,25 +16,18 @@ export class TodoApp extends Marionette.Application
   constructor(options)
   {
     super(options);
-
-    this.todoModel = new TodoModel({
-      app: this
-    });
-
-    this.todoCollection = new Backbone.Collection(options.initialData);
-
   }
-}
 
-var app = new Marionette.Application({
-  onStart: function(options){
-    var todo = new TodoView({
+  onStart(options)
+  {
+    const todoView = new TodoView({
       collection: new Backbone.Collection(options.initialData),
       model: new TodoModel()
     });
-    todo.render();
-    todo.triggerMethod('show');
+    todoView.render();
+    todoView.triggerMethod('show');
   }
-});
+}
 
-app.start({initialData: initialData});
+window.app = new TodoApp;
+window.app.start({initialData: initialData});

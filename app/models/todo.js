@@ -1,63 +1,36 @@
-// import Backbone from 'backbone';
+'use strict';
 
-// export class TodoModel extends Backbone.Model
-// {
-//   constructor(options)
-//   {
-//     super(options);
-//     // this.app = options.app;
-//   }
+import Backbone from 'backbone';
 
-//   defaults()
-//   {
-//     return {
-//       assignee: '',
-//       text: ''
-//     };
-//   }
+export default class TodoModel extends Backbone.Model
+{
+  constructor(options)
+  {
+    super(options);
+  }
 
-//   validate(attrs)
-//   {
-//     const errors = {};
-//     let hasError = false;
-//     if (!attrs.assignee)
-//     {
-//       errors.assignee = 'assignee must be set';
-//       hasError = true;
-//     }
-//     if (!attrs.text)
-//     {
-//       errors.text = 'text must be set';
-//       hasError = true;
-//     }
-//     console.log('errors', errors);
-//     if (hasError) return errors;
-//   }
-// }
+  defaults(evt)
+  {
+    return {
+      assignee: '',
+      text: ''
+    };
+  }
 
-var Backbone = require('backbone');
-
-var ToDo = Backbone.Model.extend({
-  defaults: {
-    assignee: '',
-    text: ''
-  },
-
-  validate: function (attrs) {
-    var errors = {};
-    var hasError = false;
-    if (!attrs.assignee) {
+  validate(attrs)
+  {
+    const errors = {};
+    let hasError = false;
+    if (!attrs.assignee)
+    {
       errors.assignee = 'assignee must be set';
       hasError = true;
     }
-    if (!attrs.text) {
+    if (!attrs.text)
+    {
       errors.text = 'text must be set';
       hasError = true;
     }
-    if (hasError) {
-      return errors;
-    }
+    if (hasError) return errors;
   }
-});
-
-module.exports = ToDo;
+}
