@@ -1,5 +1,3 @@
-'use strict';
-
 import Marionette from 'backbone.marionette';
 import TodoItemTemplate from '../templates/todoitem.html';
 

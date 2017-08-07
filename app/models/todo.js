@@ -1,14 +1,7 @@
-'use strict';
-
 import Backbone from 'backbone';
 
 export default class TodoModel extends Backbone.Model
 {
-  constructor(options)
-  {
-    super(options);
-  }
-
   defaults(evt)
   {
     return {

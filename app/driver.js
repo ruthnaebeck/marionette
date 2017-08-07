@@ -1,5 +1,3 @@
-'use strict';
-
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
@@ -13,11 +11,6 @@ const initialData = [
 
 export class TodoApp extends Marionette.Application
 {
-  constructor(options)
-  {
-    super(options);
-  }
-
   onStart(options)
   {
     const todoView = new TodoView({
@@ -25,7 +18,6 @@ export class TodoApp extends Marionette.Application
       model: new TodoModel()
     });
     todoView.render();
-    todoView.triggerMethod('show');
   }
 }
 

@@ -1,5 +1,3 @@
-'use strict';
-
 import Marionette from 'backbone.marionette';
 import FormTemplate from '../templates/form.html';
 
