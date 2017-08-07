@@ -20,8 +20,8 @@ export default class TodoView extends Marionette.LayoutView
 
   onRender()
   {
-    var formView = new FormView({model: this.model});
-    var listView = new ListView({collection: this.collection});
+    const formView = new FormView({model: this.model});
+    const listView = new ListView({collection: this.collection});
     this.showChildView('form', formView);
     this.showChildView('list', listView);
   }
@@ -39,7 +39,7 @@ export default class TodoView extends Marionette.LayoutView
     }, {validate: true});
 
     if (this.model.isValid()) {
-      var items = this.model.pick('assignee', 'text');
+      const items = this.model.pick('assignee', 'text');
       this.collection.add(items);
     }
   }
